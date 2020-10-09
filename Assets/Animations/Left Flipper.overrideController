@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Left Flipper
+  m_Controller: {fileID: 9100000, guid: c3e59da3bdac36e45bb3d701fcd0b392, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 07bb95d4f3e5c4b41b0ca93004d19587, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ba2b7e2bc27f5724199c03ba113f3416, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e37b2d0eb2ddf0e448c984d779f2d05a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 587f75139a92b84469e8b9fe61a61413, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 99671d3fe72a9e246be9bdb7c59fdf42, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8006e6e52d01f3c4388a81432268e50a, type: 2}

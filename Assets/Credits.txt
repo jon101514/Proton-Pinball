@@ -1,0 +1,18 @@
+--FONTS--
+M04 Fatal Fury by Miffies; mfs.jp.org https://www.dafont.com/m04fatal-fury.font
+M12 Match Biker by Miffies; https://www.dafont.com/m12-match-biker.font
+Retron 2000 by Daymarius; https://www.dafont.com/retron2000.font
+Silkscreen by Jason Aleksandr Kottke; https://www.dafont.com/silkscreen.font
+Pixeled by OmegaPC777; https://www.dafont.com/pixeled.font
+Hannover Messe by Chequered Ink; https://www.fontspace.com/hannover-messe-sans-font-f28298s
+
+--SFX--
+Superman (N64) by Cooper B. Chance; https://www.sounds-resource.com/nintendo_64/superman/sound/9044/
+Gunstar Heroes (GEN) by Nai255; https://www.sounds-resource.com/genesis_32x_scd/gunstarheroes/sound/354/
+
+--SPRITES--
+Wario Land from A.J. Nitro; https://www.spriters-resource.com/game_boy_gbc/wl/sheet/8305/
+Ernie from Superjustinbros; https://www.spriters-resource.com/nes/sesamestreet123/sheet/90855/
+
+--TEXTURES--
+Lebombo HDRI Image by Greg Zaal; https://hdrihaven.com/hdri/?c=urban&h=lebombo
