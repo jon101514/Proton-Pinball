@@ -7,12 +7,17 @@ public class ModeManager : MonoBehaviour {
 
 	public static ModeManager instance;
 
-
 	public Text timerText;
+	public LightControl modeLight;
+	public LightControl ernieLight;
+	public LightControl orbLight;
+	public LightControl raidLight;
+	public LightControl wizLight;
+	public LightControl warioLight;
 
 	private bool timerOn = false;
 	private float timer;
-	private string currentMode;
+	private string currentMode = "";
 	private List<string> completedModes;
 	private List<string> remainingModes;
 
@@ -39,6 +44,7 @@ public class ModeManager : MonoBehaviour {
 	 * "wario" "vod" "ernie" "orb" "raid" "wiz"
 	 */
 	public void StartMode() {
+		Debug.Log("[*]-START MODE-[*]");
 		if (remainingModes.Count == 0) { // All modes completed; wizard mode activates
 			WizardMode();
 			ResetModeLists();
@@ -70,6 +76,10 @@ public class ModeManager : MonoBehaviour {
 		}
 	}
 
+	public void TargetHit(string targetID) {
+		DebugPrinter.instance.SetRecentTarget(targetID);
+	}
+
 	public void WizardMode() {
 		MusicPlayer.instance.PlayAudio("Wizard");
 		timer = WIZ_TIME;
@@ -80,15 +90,26 @@ public class ModeManager : MonoBehaviour {
 	 */
 	public string GetMode() { return currentMode; }
 
+	public List<string> GetRemainingModes() { return remainingModes; }
+	public List<string> GetCompletedModes() { return completedModes; }
+
 	/** Ends the current mode and sets it back to "".
 	 *
 	 */
-	public void EndMode() { currentMode = ""; }
+	public void EndMode() { 
+		timerText.text = "0";
+		currentMode = ""; 
+		timerOn = false;
+		MusicPlayer.instance.ResumeMusic();
+	}
 
 	private void Update() {
 		if (timerOn) {
 			timer -= Time.deltaTime;
 			timerText.text = timer.ToString("#.");
+			if (timer <= -1) {
+				EndMode();
+			}
 		}
 	}
 

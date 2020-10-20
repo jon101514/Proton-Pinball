@@ -30,6 +30,7 @@ public class ScoreManager : MonoBehaviour {
 	 *
 	 */
 	public int GetScore() { return score; }
+	public int GetJetHits() { return jetHits; }
 
 	/** Resets the score back to 0 and lets the UI know as well.
 	 *

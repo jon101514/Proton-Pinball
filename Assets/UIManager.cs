@@ -83,7 +83,6 @@ public class UIManager : MonoBehaviour {
 	}
 
 	private IEnumerator Message(string msg, float len) {
-		
 		messaging = true;
 		scoreText.enabled = false;
 		ballText.enabled = false; 
@@ -93,12 +92,25 @@ public class UIManager : MonoBehaviour {
 		largeText.text = msg;
 		yield return new WaitForSeconds(len);
 		messaging = false;
-		scoreText.enabled = true;
 		ballText.enabled = true; 
 		largeText.enabled = false;
-		if (ModeManager.instance.GetMode() != "") {
+		if (IsModeActive()) { // If mode is currently active, show the timer/smalltext
 			timerText.enabled = true;
-			smallText.enabled = true;	
+			smallText.enabled = true;
+			scoreText.enabled = false;	
+		} else {  // Otherwise, hide them.
+			timerText.enabled = false;
+			smallText.enabled = false;	
+			scoreText.enabled = true;
 		}
+	}
+
+	/** Whether or not a mode is currently in play.
+	* */
+	private bool IsModeActive() {
+		if (ModeManager.instance.GetMode().Trim() == "") { // No mode, false
+			return false; 
+		} 
+		return true;
 	}
 }

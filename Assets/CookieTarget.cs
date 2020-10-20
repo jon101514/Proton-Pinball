@@ -11,7 +11,7 @@ public class CookieTarget : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision coll) {
 		if (coll.gameObject.tag.Equals("Ball")) {
-
+			ModeManager.instance.TargetHit("COOK");
 			ScoreManager.instance.AddToScore(points);
 			hp--;
 			if (hp > 1) {

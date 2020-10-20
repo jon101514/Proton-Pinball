@@ -29,6 +29,7 @@ public class MusicPlayer : MonoBehaviour {
 	private float songLength;
 
 	private AudioSource audi;
+	private AudioClip prevMain;
 
 	private void Awake() {
 		if (instance == null) {
@@ -45,9 +46,11 @@ public class MusicPlayer : MonoBehaviour {
 			songLength = prelaunch.length;
 			StartCoroutine(LoopAudio(prelaunch));
 		} else if (songName == "Main" || songName == "Main 1") {
+			prevMain = main1;
 			songLength = main1.length + main1Intro.length;
 			StartCoroutine(LoopAudio(main1, main1Intro));
 		} else if (songName == "Main 2") {
+			prevMain = main2;
 			songLength = main2.length + main2Intro.length;
 			StartCoroutine(LoopAudio(main2, main2Intro));
 		} else if (songName == "Wizard") {
@@ -95,7 +98,18 @@ public class MusicPlayer : MonoBehaviour {
 			songLength = smrpg.length;
 			audi.PlayOneShot(smrpg);
 		}
+	}
 
+	public void ResumeMusic() {
+		StopAllCoroutines();
+		audi.Stop();
+		if (prevMain == main1) {
+			songLength = main1.length;
+			StartCoroutine(LoopAudio(main1));
+		} else {  // prevMain == main2
+			songLength = main2.length;
+			StartCoroutine(LoopAudio(main2));
+		}
 	}
 
 	public float GetSongLength() {

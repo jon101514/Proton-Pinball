@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 	private int balls = 3;
 	private string gameState = "menu"; // "over", "game", "launch", "endofball", "menu"
 	[SerializeField]
-	private int ballsInPlay = 1;
+	private int ballsInPlay = 0;
 	[SerializeField]
 	private float timer;
 	private bool kickback = false;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 	/** Reset all the round's values and adds a ball to the game.
 	 * param[instaFlip = false] - if true, adds a ball to the instaflip position and prevents prelaunch music from playing.
 	 */
-	public void SpawnBall(bool instaFlip = false) {
+	public void SpawnBall(bool instaFlip = false, bool fromBallLock = false) {
 		Tilt.instance.ResetTilts();
 		// Reset the flippers
 		Flipper[] flippers = FindObjectsOfType<Flipper>();
@@ -54,7 +54,10 @@ public class GameManager : MonoBehaviour {
 		SetGameState("launch");
 		// In launching, set the camera to see the launcher.
 		cameraAnim.SetBool("launching", true);
-		ballsInPlay++;
+		// We don't increase ballsInPlay because the balls trapped in the bucket aren't technically in play
+		if (!fromBallLock) {
+			ballsInPlay++;
+		}
 		if (instaFlip) {
 			Instantiate(ballPrefab, instaFlipPos, Quaternion.identity);
 			return;
@@ -72,14 +75,18 @@ public class GameManager : MonoBehaviour {
 	public void DestroyBall(GameObject ball) {
 		Destroy(ball);
 		ballsInPlay--;
-		EndOfBall();
+		if (ballsInPlay <= 0) {
+			EndOfBall();
+		}
 	}
 
 	/** Either kicks the ball back or sets the game state to 'endofball', docks one ball, and checks if it's game over.
 	 * 
 	 */
 	public void EndOfBall() {
-		if (timer <= GRACE_PERIOD && !kickback && ModeManager.instance.GetMode() != "") {
+		Debug.Log("1. timer <= GRACE_PERIOD: " + (timer <= GRACE_PERIOD));
+		Debug.Log("2. !kickback: " + !kickback);
+		if (timer <= GRACE_PERIOD && !kickback) {
 			StartCoroutine(Kickback());
 			return;
 		} 
@@ -94,8 +101,15 @@ public class GameManager : MonoBehaviour {
 
 	public int GetBalls() { return balls; }
 
+	// For the debugPrinter
+	public int GetBallsInPlay() { return ballsInPlay; }
+	public float GetTimer() { return timer; }
+	public int GetBallsLocked() { return ballsLocked; }
+
 	// Can be "over", "game", "launch", "endofball", "menu"
 	public string GetGameState() { return gameState; }
+
+	public bool GetKickback() { return kickback; }
 
 	// Can be "over", "game", "launch", "endofball", "menu"
 	public void SetGameState(string pGameState) { 
@@ -105,12 +119,16 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void ResetTimer() { timer = 0f; }
+	public void ResetTimer() { 
+		Debug.Log("ResetTimer");
+		timer = 0f; 
+	}
 
 	public void LockBall() {
+		Debug.Log("LockBall() called by Pinball.cs");
 		UIManager.instance.GenericMessage("BALL LOCKED");
 		ballsLocked++;
-		StartCoroutine(Kickback());
+		StartCoroutine(Kickback(true));
 		if (ballsLocked >= 2) {
 			StartCoroutine(MultiballPour());
 		}	
@@ -124,6 +142,8 @@ public class GameManager : MonoBehaviour {
 		foreach (Pinball ball in ballRA) {
 			ball.Unlock();
 		}
+		ballsInPlay += 2;
+		ballsLocked = 0;
 		MusicPlayer.instance.PlayAudio("Multiball");
 	}
 
@@ -133,9 +153,9 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator Kickback() {
+	private IEnumerator Kickback(bool fromBallLock = false) {
 		kickback = true;
-		SpawnBall(true);
+		SpawnBall(true, fromBallLock);
 		UIManager.instance.Kickback();
 		yield return new WaitForSeconds(1f);
 		FindObjectOfType<Launcher>().Launch();

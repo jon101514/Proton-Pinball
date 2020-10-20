@@ -6,6 +6,7 @@ public class Pinball : MonoBehaviour {
 
 	private float force = 1/4f;
 	private float kickback = 4f;
+	private float forceball = 1.5f;
 	private bool locked = false;
 
 	private Rigidbody rb;
@@ -63,6 +64,10 @@ public class Pinball : MonoBehaviour {
 			if (coll.GetComponent<Kickback>().GetCanKick()) {
 				rb.AddForce(Vector3.forward * kickback, ForceMode.Impulse);
 			}
+		} else if (coll.gameObject.CompareTag("Force Ball")) {
+			rb.AddForce(Vector3.forward * forceball, ForceMode.Impulse);
+		} else if (coll.gameObject.CompareTag("Slow Ball")) {
+			rb.velocity *= 0.875f;
 		}
 	}
 

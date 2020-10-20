@@ -11,6 +11,8 @@ TagManager:
   - Ramp Door Trigger
   - Kickback
   - Bucket
+  - Force Ball
+  - Slow Ball
   layers:
   - Default
   - TransparentFX

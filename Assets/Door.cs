@@ -22,7 +22,8 @@ public class Door : MonoBehaviour {
 	}
 
 	public void Close() {
-		if (anim.GetBool("isOpen") == true) {
+		if (anim.GetBool("isOpen") == true && !GameManager.instance.GetKickback()) {
+			GameManager.instance.ResetTimer();
 			if (main2) {
 				MusicPlayer.instance.PlayAudio("Main 2");
 			} else {
@@ -31,7 +32,6 @@ public class Door : MonoBehaviour {
 			main2 = !main2;
 		}
 		GameManager.instance.SetGameState("game");
-		GameManager.instance.ResetTimer();
 		anim.SetBool("isOpen", false);
 	}
 }

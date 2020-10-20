@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
+	public string targetID; 
 	public int points = 1000;
 	public string callFunction;
 	public MetalPole pole;
@@ -12,7 +13,7 @@ public class Target : MonoBehaviour {
 		if (coll.gameObject.tag.Equals("Ball")) {
 
 			ScoreManager.instance.AddToScore(points);
-
+			ModeManager.instance.TargetHit(targetID);
 			if (callFunction == "Multiball") {
 				Bucket.instance.Pour();
 			} else if (callFunction == "Wobble") {
@@ -27,7 +28,7 @@ public class Target : MonoBehaviour {
 		if (coll.gameObject.tag.Equals("Ball")) {
 
 			ScoreManager.instance.AddToScore(points);
-
+			ModeManager.instance.TargetHit(targetID);
 			if (callFunction == "Multiball") {
 				Bucket.instance.Pour();
 			} else if (callFunction == "Wobble") {
@@ -37,4 +38,5 @@ public class Target : MonoBehaviour {
 			}
 		}
 	}
+
 }
