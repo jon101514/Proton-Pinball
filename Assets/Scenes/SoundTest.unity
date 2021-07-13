@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.13586026, g: 0.11149716, b: 0.3368131, a: 1}
+  m_IndirectSpecularColor: {r: 0.13586026, g: 0.12843749, b: 0.3368131, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -183,11 +183,20 @@ MonoBehaviour:
   multiball: {fileID: 8300000, guid: bccc4712d9c123b4cb4d73cc42455d6c, type: 3}
   multiballIntro: {fileID: 8300000, guid: 924c008af144adb449340a2e0fc311cb, type: 3}
   ronaldinho: {fileID: 8300000, guid: 561192ed71e55bb4fb5ef294978ef99e, type: 3}
+  hotd: {fileID: 8300000, guid: d72d3dbe6e411624abe0d6552cec7543, type: 3}
+  wizardIntro: {fileID: 8300000, guid: 2011a5006ac0fff40b0177a534c0d6e2, type: 3}
   wizard: {fileID: 8300000, guid: d37098fc1bb81264993ef803ef4447ef, type: 3}
   endOfBall: {fileID: 8300000, guid: 4db1050fee436674ab79977cf7a78b3f, type: 3}
   endOfGame: {fileID: 8300000, guid: 558773b3abb16eb41b381f8f630e6cd5, type: 3}
+  bmanIntro: {fileID: 8300000, guid: e5740b2dd3d1c0a48bad72abc7d7253e, type: 3}
+  bman: {fileID: 8300000, guid: 1b2611beb5b6b1d4c81c071f21d8cdea, type: 3}
+  vodFanfare: {fileID: 8300000, guid: 74620db19a1abb541b2b82bf5209b001, type: 3}
+  orbFanfare: {fileID: 8300000, guid: 2ab28e95cbe97f84db16ae2b1005a66c, type: 3}
+  warioFanfare: {fileID: 8300000, guid: 314464fbc8a86e94791e15e6b0be42fb, type: 3}
+  ernieFanfare: {fileID: 8300000, guid: f436d01e75b44954ebe643389d72ed40, type: 3}
+  raidFanfare: {fileID: 8300000, guid: b9814b045107a7a4fa8c08400f0dde47, type: 3}
+  hotdFanfare: {fileID: 8300000, guid: 45d0c38f5ca3dd24b9d011c76e20932d, type: 3}
   pokey: {fileID: 8300000, guid: 2812046f151fdba4394a9839a37bddca, type: 3}
-  smrpg: {fileID: 8300000, guid: b9814b045107a7a4fa8c08400f0dde47, type: 3}
 --- !u!82 &276947447
 AudioSource:
   m_ObjectHideFlags: 0
@@ -369,9 +378,37 @@ MonoBehaviour:
     artist: KOJI KONDO
     info: FROM 'SUPER MARIO WORLD (SNES)'
   - key: SMRPG
-    title: (UNUSED) RAID COMPLETE - VICTORY
+    title: RAID COMPLETE - VICTORY
     artist: YOKO SHIMOMURA
     info: 'FROM ''SUPER MARIO RPG: LEGEND OF THE SEVEN STARS (SNES)'''
+  - key: Ace Of Spades Fanfare
+    title: SAVE THE VOD COMPLETE
+    artist: MOTORHEAD
+    info: FROM 'TONY HAWK'S PRO SKATER 3 (N64)'
+  - key: Orb Fanfare
+    title: ORB-3D COMPLETE
+    artist: PETER STONE
+    info: FROM 'ORB 3-D (NES)'
+  - key: Wario Fanfare
+    title: WARIO VIDEO MODE COMPLETE
+    artist: NORIO HANZAWA AND MINAKO HAMANO
+    info: FROM 'WARIO WORLD (GCN)'
+  - key: Ernie Fanfare
+    title: ERNIE'S MAGIC SHAPES - COMPLETE
+    artist: DAVID WISE
+    info: 'FROM ''SESAME STREET: 1-2-3 (NES)'''
+  - key: HOTD
+    title: THE MAGICIAN
+    artist: TETSUYA KAWAUCHI AND HARUYOSHI TOMITA
+    info: FROM 'THE HOUSE OF THE DEAD 2 (ARC)'
+  - key: HOTD Fanfare
+    title: MAGICIAN BOSS MODE COMPLETE
+    artist: TETSUYA KAWAUCHI AND HARUYOSHI TOMITA
+    info: FROM 'THE HOUSE OF THE DEAD 2 (ARC)'
+  - key: Bomberman
+    title: BATTLE MODE SETUP
+    artist: JUN CHIKUMA AND YASUHIKO FUKUDA
+    info: FROM 'SUPER BOMBERMAN 4 (SFC)'
   songText: {fileID: 1043906908}
 --- !u!1 &698010293
 GameObject:

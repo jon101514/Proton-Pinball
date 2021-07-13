@@ -13,6 +13,7 @@ TagManager:
   - Bucket
   - Force Ball
   - Slow Ball
+  - Ball Magnet
   layers:
   - Default
   - TransparentFX

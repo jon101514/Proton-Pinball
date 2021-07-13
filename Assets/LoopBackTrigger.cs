@@ -13,9 +13,7 @@ public class LoopBackTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider coll) {
 		
 		if (coll.gameObject.tag.Equals("Ball")) {
-			Debug.Log("TOUCHED A PINBALL");
 			touchTime = Time.time;
-			Debug.Log(touchTime + "\t" + front.GetTouchTime());
 			if (touchTime - front.GetTouchTime() <= TRIGGER_THRESHOLD) {
 				SFXManager.instance.PlaySoundGroup("Superman");
 			}

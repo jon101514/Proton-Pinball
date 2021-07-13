@@ -9,6 +9,8 @@ public class Pinball : MonoBehaviour {
 	private float forceball = 1.5f;
 	private bool locked = false;
 
+    private const float MAG_FORCE = 3f;
+
 	private Rigidbody rb;
 	private Transform tm;
 
@@ -70,6 +72,16 @@ public class Pinball : MonoBehaviour {
 			rb.velocity *= 0.875f;
 		}
 	}
+
+    /* Pull towards the center of the magnet. */
+    private void OnTriggerStay(Collider coll) {
+        if (coll.gameObject.CompareTag("Ball Magnet")) {
+            BallMagnet mag = coll.GetComponent<BallMagnet>();
+            if (mag.isOn) {
+                rb.AddForce((mag.transform.position - tm.position) * MAG_FORCE, ForceMode.Force);
+            }
+        }
+    }
 
 	private void OnTriggerExit(Collider coll) {
 		

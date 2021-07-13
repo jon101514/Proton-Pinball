@@ -48,35 +48,38 @@ public class ScoreManager : MonoBehaviour {
 	/** Counts the end-of-ball bonuses for modes/jets/spins.
 	 * Note that this will also reset the amount of modes/jets/spins completed for this ball.
 	 */
-	public void EndOfBallBonus() {
-		StartCoroutine(CountBonuses());
+	public void EndOfBallBonus(int modesComplete) {
+		StartCoroutine(CountBonuses(modesComplete));
 	}	
 
-	private IEnumerator CountBonuses() {
+	private IEnumerator CountBonuses(int modesComplete) {
 		int totalBonus = 0;
 		int modeBonus = 0;
 		int jetBonus = 0;
 		int spinBonus = 0;
 
 		yield return new WaitForSeconds(0.084f);
-		UIManager.instance.GenericMessage("MODES\n");
+		modeBonus = 5000 * modesComplete;
+		UIManager.instance.GenericMessage("MODES\n5000 x " + modesComplete + " = " + PrintScore(modeBonus), 0.531f);
 		yield return new WaitForSeconds(0.531f);
 		jetBonus = 250 * jetHits;
-		UIManager.instance.GenericMessage("JETS\n250 x " + jetHits + " = " + PrintScore(jetBonus));
+		UIManager.instance.GenericMessage("JETS\n250 x " + jetHits + " = " + PrintScore(jetBonus), 0.445f);
 		AddToScore(spinBonus);
 		yield return new WaitForSeconds(0.445f);
 		spinBonus = 100 * FindObjectOfType<SpinningTarget>().GetLoops();
-		UIManager.instance.GenericMessage("SPINS\n100 x " + FindObjectOfType<SpinningTarget>().GetLoops() + " = " + PrintScore(spinBonus));
+		UIManager.instance.GenericMessage("SPINS\n100 x " + FindObjectOfType<SpinningTarget>().GetLoops() + " = " + PrintScore(spinBonus), 0.531f);
 		AddToScore(spinBonus);
 		yield return new WaitForSeconds(0.531f);
-		UIManager.instance.GenericMessage("TOTAL BONUS:\n");
+		UIManager.instance.GenericMessage("TOTAL BONUS:\n", 0.531f);
 		yield return new WaitForSeconds(0.531f);
 		totalBonus = modeBonus + jetBonus + spinBonus;
-		UIManager.instance.GenericMessage("TOTAL BONUS:\n" + PrintScore(totalBonus));
+		UIManager.instance.GenericMessage("TOTAL BONUS:\n" + PrintScore(totalBonus), 1);
 		yield return new WaitForSeconds(1f);
 		// Reset the values as counted for the bonuses here.
 		FindObjectOfType<SpinningTarget>().ResetLoops();
+		ModeManager.instance.ResetModesCompleted();
 		jetHits = 0;
+		UIManager.instance.UpdateScoreUI();
 	}
 
 	private string PrintScore(int score) {

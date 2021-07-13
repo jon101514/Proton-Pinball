@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 	 */
 	public void StartGame() {
 		cameraAnim.SetBool("playing", true);
+		ModeManager.instance.ResetModesCompleted();
 		balls = 3;
 		SpawnBall();
 	}
@@ -75,6 +76,10 @@ public class GameManager : MonoBehaviour {
 	public void DestroyBall(GameObject ball) {
 		Destroy(ball);
 		ballsInPlay--;
+		// Go from Multiball back to normal mode.
+		if (ballsInPlay == 1 && ModeManager.instance.GetMode() == "multiball") {
+			ModeManager.instance.EndMultiball();
+		}
 		if (ballsInPlay <= 0) {
 			EndOfBall();
 		}
@@ -144,6 +149,7 @@ public class GameManager : MonoBehaviour {
 		}
 		ballsInPlay += 2;
 		ballsLocked = 0;
+		ModeManager.instance.Multiball();
 		MusicPlayer.instance.PlayAudio("Multiball");
 	}
 
@@ -164,12 +170,12 @@ public class GameManager : MonoBehaviour {
 	private IEnumerator CheckGameOver() {
 		if (balls <= 0 && gameState != "over") { // Game is over
 			MusicPlayer.instance.PlayAudio("End Of Ball");
-			ScoreManager.instance.EndOfBallBonus();
+			ScoreManager.instance.EndOfBallBonus(ModeManager.instance.GetModesCompleted());
 			yield return new WaitForSecondsRealtime(MusicPlayer.instance.GetSongLength());
 			GameOver();
 		} else { // Go to next ball
 			MusicPlayer.instance.PlayAudio("End Of Ball");
-			ScoreManager.instance.EndOfBallBonus();
+			ScoreManager.instance.EndOfBallBonus(ModeManager.instance.GetModesCompleted());
 			yield return new WaitForSecondsRealtime(MusicPlayer.instance.GetSongLength());
 			SpawnBall();
 		}

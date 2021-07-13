@@ -13,7 +13,7 @@ public class Target : MonoBehaviour {
 		if (coll.gameObject.tag.Equals("Ball")) {
 
 			ScoreManager.instance.AddToScore(points);
-			ModeManager.instance.TargetHit(targetID);
+			ModeManager.instance.TargetHit(targetID, points);
 			if (callFunction == "Multiball") {
 				Bucket.instance.Pour();
 			} else if (callFunction == "Wobble") {
@@ -28,7 +28,7 @@ public class Target : MonoBehaviour {
 		if (coll.gameObject.tag.Equals("Ball")) {
 
 			ScoreManager.instance.AddToScore(points);
-			ModeManager.instance.TargetHit(targetID);
+			ModeManager.instance.TargetHit(targetID, points);
 			if (callFunction == "Multiball") {
 				Bucket.instance.Pour();
 			} else if (callFunction == "Wobble") {

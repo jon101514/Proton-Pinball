@@ -36,7 +36,6 @@ public class SFXManager : MonoBehaviour {
 
 	public void PlaySoundGroup(string groupName) {
 		if (groupName == "Superman") {
-			Debug.Log("Then there's no time to waste");
 			PlaySound("notime");
 		}
 	}

@@ -18,13 +18,24 @@ public class MusicPlayer : MonoBehaviour {
 	public AudioClip ernie, ernieIntro;
 	public AudioClip multiball, multiballIntro;
 	public AudioClip ronaldinho;
+    public AudioClip hotd;
 
-	public AudioClip wizard;
+	public AudioClip wizardIntro, wizard;
 	public AudioClip endOfBall;
 	public AudioClip endOfGame;
 
-	//UNUSED
-	public AudioClip pokey, smrpg;
+	public AudioClip bmanIntro, bman;
+
+	// Fanfares
+	public AudioClip vodFanfare;
+	public AudioClip orbFanfare;
+	public AudioClip warioFanfare;
+	public AudioClip ernieFanfare;
+	public AudioClip raidFanfare;
+    public AudioClip hotdFanfare;
+
+    //UNUSED
+    public AudioClip pokey;
 
 	private float songLength;
 
@@ -54,8 +65,9 @@ public class MusicPlayer : MonoBehaviour {
 			songLength = main2.length + main2Intro.length;
 			StartCoroutine(LoopAudio(main2, main2Intro));
 		} else if (songName == "Wizard") {
-			songLength = wizard.length;
-			StartCoroutine(LoopAudio(wizard));
+			prevMain = wizard;
+			songLength = wizard.length + wizardIntro.length;
+			StartCoroutine(LoopAudio(wizard, wizardIntro));
 		} else if (songName == "Intermission") {
 			songLength = intermission.length;
 			StartCoroutine(LoopAudio(intermission));
@@ -77,12 +89,19 @@ public class MusicPlayer : MonoBehaviour {
 		} else if (songName == "Multiball") {
 			songLength = multiball.length + multiballIntro.length;
 			StartCoroutine(LoopAudio(multiball, multiballIntro));
-		} else if (songName == "Pokey") {
+		} else if (songName == "Bomberman") {
+			prevMain = bman;
+			songLength = bman.length + bmanIntro.length;
+			StartCoroutine(LoopAudio(bman, bmanIntro));
+        }  else if (songName == "Pokey") {
 			songLength = pokey.length;
 			StartCoroutine(LoopAudio(pokey));
-		}
-		// One-Shots
-		if (songName == "End Of Ball") {
+        } else if (songName == "HOTD") {
+            songLength = hotd.length;
+            StartCoroutine(LoopAudio(hotd));
+        }
+        // One-Shots
+        if (songName == "End Of Ball") {
 			songLength = endOfBall.length;
 			audi.PlayOneShot(endOfBall);
 			if (!soundTest) {
@@ -94,10 +113,48 @@ public class MusicPlayer : MonoBehaviour {
 		} else if (songName == "Ronaldinho") {
 			songLength = ronaldinho.length;
 			audi.PlayOneShot(ronaldinho);
-		} else if (songName == "SMRPG") {
-			songLength = smrpg.length;
-			audi.PlayOneShot(smrpg);
-		}
+		} else if (songName == "SMRPG" || songName == "Raid Fanfare") {
+			songLength = raidFanfare.length;
+			audi.PlayOneShot(raidFanfare);
+			if (!soundTest) {
+				StartCoroutine(ResumeMusicDelay(raidFanfare.length));
+			}
+		} else if (songName == "Ace Of Spades Fanfare") {
+			songLength = vodFanfare.length;
+			audi.PlayOneShot(vodFanfare);
+			if (!soundTest) {
+				StartCoroutine(ResumeMusicDelay(vodFanfare.length));
+			}
+		} else if (songName == "Orb Fanfare") {
+			songLength = orbFanfare.length;
+			audi.PlayOneShot(orbFanfare);
+			if (!soundTest) {
+				StartCoroutine(ResumeMusicDelay(orbFanfare.length));
+			}
+		} else if (songName == "Wario Fanfare") {
+			songLength = warioFanfare.length;
+			audi.PlayOneShot(warioFanfare);
+			if (!soundTest) {
+				StartCoroutine(ResumeMusicDelay(warioFanfare.length));
+			}
+		} else if (songName == "Ernie Fanfare") {
+			songLength = ernieFanfare.length;
+			audi.PlayOneShot(ernieFanfare);
+			if (!soundTest) {
+				StartCoroutine(ResumeMusicDelay(ernieFanfare.length));
+			}
+		} else if (songName == "HOTD Fanfare") {
+            songLength = hotdFanfare.length;
+            audi.PlayOneShot(hotdFanfare);
+            if (!soundTest) {
+                StartCoroutine(ResumeMusicDelay(hotdFanfare.length));
+            }
+        }
+    }
+
+	private IEnumerator ResumeMusicDelay(float len) {
+		yield return new WaitForSeconds(len);
+		ResumeMusic();
 	}
 
 	public void ResumeMusic() {

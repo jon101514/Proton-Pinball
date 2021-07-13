@@ -29,8 +29,15 @@ public class UIManager : MonoBehaviour {
 	public void UpdateScoreUI() {
 		// scoreText.text = score.ToString("N", nfi);
 		if (!messaging) {
-			timerText.enabled = false;
-			smallText.enabled = false;
+			if (!IsModeActive()) { // If a mode is not currently active, display the score.
+				timerText.enabled = false;
+				smallText.enabled = false;
+				scoreText.enabled = true;
+			} else { // Otherwise, display the timer and small text not the score.
+				timerText.enabled = true;
+				smallText.enabled = true;
+				scoreText.enabled = false;
+			}
 			scoreText.text = string.Format("{0:#,###0}", ScoreManager.instance.GetScore()) + "\n";
 			ballText.text = " BALLS: " + GameManager.instance.GetBalls().ToString();
 			largeText.enabled = false;
@@ -45,21 +52,19 @@ public class UIManager : MonoBehaviour {
 			smallText.text = "USE FLIPPERS TO CHOOSE BUCKET";
 		} else if (mode == "vod") {
 			StartCoroutine(Message("SAVE THE VOD", 3/2f));
-			smallText.text = "SHOOT EGG TO LOWER VOLUME";
+			smallText.text = "SHOOT COOKIE TO LOWER VOLUME";
 		} else if (mode == "raid") {
 			StartCoroutine(Message("RAID COUNTERMEASURES", 3/2f));
-			smallText.text = "ALL SHOTS 2X";
+			smallText.text = "ALL SHOTS\nSCORE 2X";
 		} else if (mode == "ernie") {
 			StartCoroutine(Message("ERNIE'S MAGIC SHAPES", 3/2f));
-			smallText.text = "SHOOT COOKIE TO BUILD SHAPES";
+			smallText.text = "SHOOT EGG TO BUILD SHAPES";
 		} else if (mode == "orb") {
 			StartCoroutine(Message("ORB 3D", 3/2f));
 			smallText.text = "SHOOT RAMPS TO ATTACK";
 		}
 		timerText.enabled = true;
 		smallText.enabled = true;
-		Debug.Log("DISPLAY MESSAGE");
-		Debug.Log("DISPLAY ANIMATION");
 	}
 
 	public void Tilt() {
@@ -77,9 +82,15 @@ public class UIManager : MonoBehaviour {
 		StartCoroutine(Message("BALL SAVED\nDON'T MOVE", 3/2f));
 	}
 
-	public void GenericMessage(string msg) {
+	public void ModeMessage(string msg, float len = 3/2f) {
 		StopAllCoroutines();
-		StartCoroutine(Message(msg, 3/2f));
+		StartCoroutine(Message(msg, len));
+	}
+
+	public void GenericMessage(string msg, float len = 3/2f) {
+		if (messaging) { return; }
+		StopAllCoroutines();
+		StartCoroutine(Message(msg, len));
 	}
 
 	private IEnumerator Message(string msg, float len) {
