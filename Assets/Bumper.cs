@@ -10,6 +10,9 @@ public class Bumper : MonoBehaviour {
 	public float xpRad = 4f;
 	public Vector3 forceDir;
 
+	/** Apply forces to the ball when touched.
+	 *
+	 */
 	private void OnCollisionEnter(Collision coll) {
 		if (coll.gameObject.CompareTag("Ball")) {
 			// Debug.Log("BALL BUMPER");

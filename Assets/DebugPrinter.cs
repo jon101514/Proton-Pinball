@@ -1,4 +1,4 @@
-﻿/** Jonathan So, jonso.gamedev@gmail.com
+﻿/** 
  *	This debug printer prints the status of variables constantly, de-cluttering the console.
  */
 using System.Collections;

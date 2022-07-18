@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.Experimental.XR;
+using UnityEngine.XR.ARSubsystems;
 using System;
 
 public class ARTapToPlaceObject : MonoBehaviour{
@@ -63,7 +64,8 @@ public class ARTapToPlaceObject : MonoBehaviour{
 	}
 
 	public void PlaceObject() {
-		if (!placementPoseIsValid || !StateManager.instance.GetState().Equals(StateManager.GameState.PLACEMENT)) { return; }
+		// if (!placementPoseIsValid || !StateManager.instance.GetState().Equals(StateManager.GameState.PLACEMENT)) { return; }
+		if (!placementPoseIsValid) { return; }
 		if (objectInstance == null) {
 			objectInstance = Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
 		} else {
@@ -71,6 +73,6 @@ public class ARTapToPlaceObject : MonoBehaviour{
 		}
 		// Hide the placement indicator
 		placementIndicator.SetActive(false);
-		StateManager.instance.ChangeState();
+		// StateManager.instance.ChangeState();
 	}
 }

@@ -6,8 +6,8 @@ public class Launcher : MonoBehaviour {
 
 	public Transform impact;
 
-	private const float MIN_LAUNCH_FORCE = 166.67f;
-	private const float MAX_LAUNCH_FORCE = 168f;
+	private const float MIN_LAUNCH_FORCE = 167.6f;
+	private const float MAX_LAUNCH_FORCE = 168.5f;
 
 	private Rigidbody rb;
 	private GameObject ball;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pinball : MonoBehaviour {
 
-	private float force = 1/4f;
+	private float force = 1/2f;
 	private float kickback = 4f;
 	private float forceball = 1.5f;
 	private bool locked = false;
@@ -32,6 +32,7 @@ public class Pinball : MonoBehaviour {
 			rb.AddForce(Vector3.forward * force, ForceMode.Impulse);
 		}
 
+		// Debug keys
 		if (Input.GetKeyDown(KeyCode.Q)) {
 			rb.AddForce(Vector3.left * force, ForceMode.Impulse);
 		} else if (Input.GetKeyDown(KeyCode.E)) {

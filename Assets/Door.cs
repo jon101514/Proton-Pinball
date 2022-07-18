@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/** The ball door that closes after the ball has been launched.
+*
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

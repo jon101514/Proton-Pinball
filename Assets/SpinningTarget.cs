@@ -17,7 +17,7 @@ public class SpinningTarget : MonoBehaviour {
 	private void FixedUpdate() {
 		degreesToSpin -= Mathf.Abs(transform.rotation.eulerAngles.x - prevXRot);
 		prevXRot = transform.rotation.eulerAngles.x;
-		if (degreesToSpin <= 0) {
+		if (degreesToSpin <= 0) { // Adds points to score every revolution
 			ScoreManager.instance.AddToScore(pointsPerSpin);
 			degreesToSpin = 360f + (degreesToSpin);
 			loops++;

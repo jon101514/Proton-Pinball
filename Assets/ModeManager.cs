@@ -72,8 +72,13 @@ public class ModeManager : MonoBehaviour {
 		if (mode == "wario") {
 			MusicPlayer.instance.PlayAudio("Wario");
 		} else {
-			if (mode == "vod") { // SAVE THE VOD
-				MusicPlayer.instance.PlayAudio("Save The VOD");
+			// if (mode == "vod") { // SAVE THE VOD
+			// 	MusicPlayer.instance.PlayAudio("Save The VOD");
+			// 	vodHP = 3;
+			// 	timer = VOD_TIME;
+			// HOTD2 mode used to be "SAVE THE VOD" using Ace of Spades 64.
+			if (mode == "vod") { // REPLACE VOD with HOTD2
+				MusicPlayer.instance.PlayAudio("HOTD");
 				vodHP = 3;
 				timer = VOD_TIME;
 			} else if (mode == "ernie") { // ERNIE'S MAGIC SHAPES
@@ -98,7 +103,7 @@ public class ModeManager : MonoBehaviour {
 	public void TargetHit(string targetID, int score) {
 		DebugPrinter.instance.SetRecentTarget(targetID); // Let Debug Printer know what's been hit.
 		switch (currentMode) { // Depending on the mode...
-			case "wario":
+			case "wario": // Not developed yet.
 				EndMode();
 				break;
 			case "vod": // Hit the cookie 3 times.
@@ -165,7 +170,7 @@ public class ModeManager : MonoBehaviour {
 
 	}
 
-	/* When the cookie is hit during Save the VOD, subtract HP and
+	/* When the cookie is hit during Save the VOD/HOTD2, subtract HP and
 	if HP is 0 or less, give players a bonus and end the mode.*/
 	private void VODDamage() {
 		vodHP--;
@@ -176,8 +181,9 @@ public class ModeManager : MonoBehaviour {
 		}
 		if (vodHP <= 0) { // Win condition
 			ScoreManager.instance.AddToScore(VOD_BONUS);
-			UIManager.instance.ModeMessage("VOD SAVED\n30,000 POINTS");
-			MusicPlayer.instance.PlayAudio("Ace Of Spades Fanfare");
+			// Changed the win message to match HOTD2.
+			UIManager.instance.ModeMessage("HOTD2 DONE!\n30,000 POINTS");
+			MusicPlayer.instance.PlayAudio("HOTD Fanfare");
 			EndMode(false);
 		}
 	}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CookieTarget : MonoBehaviour {
 
 	public int points = 1000;
-	public CookieAnim[] cookies;
+	public CookieAnim[] cookies; // the two halves of the cookie.
     public BallMagnet mag;
 
 	private int hp = 2;

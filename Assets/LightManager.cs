@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LightManager : MonoBehaviour {
 
+	// Lighting isn't really in the game yet,  so playfield lights don't flash.
+
 	// Use this for initialization
 	void Start () {
 		

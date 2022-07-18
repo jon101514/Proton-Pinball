@@ -51,8 +51,9 @@ public class UIManager : MonoBehaviour {
 			StartCoroutine(Message("WARIO VIDEO MODE", 3/2f));
 			smallText.text = "USE FLIPPERS TO CHOOSE BUCKET";
 		} else if (mode == "vod") {
-			StartCoroutine(Message("SAVE THE VOD", 3/2f));
-			smallText.text = "SHOOT COOKIE TO LOWER VOLUME";
+			// Used to be "Save the Vod", now themed after House of the Dead 2 (HOTD2)
+			StartCoroutine(Message("GOLDMAN!", 3/2f));
+			smallText.text = "SHOOT COOKIE TO DEFEAT MAGICIAN";
 		} else if (mode == "raid") {
 			StartCoroutine(Message("RAID COUNTERMEASURES", 3/2f));
 			smallText.text = "ALL SHOTS\nSCORE 2X";
